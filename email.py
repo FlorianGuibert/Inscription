@@ -1,1 +1,1 @@
-generate email
+print ("ok")
