@@ -36,6 +36,14 @@ class CalculatorApp:  # Define the calculator application class.
         self._display.grid(row=0, column=0, columnspan=4, padx=8, pady=8)  # Arrange the display across four columns.
         self._display.insert(0, "0")  # Initialize the display with zero.
 
+        self._thanks_label = tk.Label(  # Create a label for a friendly thank-you message.
+            self.root,  # Place the label in the main window.
+            text="",  # Start with no visible message.
+            font=("TkDefaultFont", 11),  # Set a readable label font and size.
+            fg="#4CAF50",  # Give the message a green text color.
+        )
+        self._thanks_label.grid(row=6, column=0, columnspan=4, pady=(4, 8))  # Place the message below the buttons.
+
         buttons = (  # Start the tuple containing all button labels and actions.
             ("C", "clear"),  # Define the clear button.
             ("+", "operator"),  # Define the addition button.
@@ -143,6 +151,7 @@ class CalculatorApp:  # Define the calculator application class.
             self.set_display("Error")  # Display an error message.
         else:  # Run if calculation succeeded.
             self.set_display(self._format_result(result))  # Display the formatted result.
+            self._thanks_label.config(text="Thank you for using me!")  # Show the friendly thank-you message.
         self._first = None  # Clear the stored first number.
         self._operator = None  # Clear the stored operator.
         self._reset_display = True  # Prepare the display for a new calculation.
@@ -152,6 +161,7 @@ class CalculatorApp:  # Define the calculator application class.
         self._operator = None  # Clear the stored operator.
         self._reset_display = False  # Disable display reset mode.
         self.set_display("0")  # Reset the display to zero.
+        self._thanks_label.config(text="")  # Remove the thank-you message after clearing.
 
     @staticmethod  # Mark the following calculation method as a static method.
     def _calculate(first, second, operator):  # Define the internal arithmetic dispatcher.
